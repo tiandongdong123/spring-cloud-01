@@ -70,4 +70,14 @@ public class Aliyun {
     public String getEndPoint() {
         return endPoint;
     }
+
+    @Override
+    public String toString() {
+        return "Aliyun{" +
+                "appKey='" + appKey + '\'' +
+                ", appSecret='" + appSecret + '\'' +
+                ", bucket='" + bucket + '\'' +
+                ", endPoint='" + endPoint + '\'' +
+                '}';
+    }
 }
