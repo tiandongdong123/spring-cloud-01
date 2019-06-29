@@ -12,39 +12,36 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = MasterDataSourceConfig.BASE_PACKAGES, sqlSessionTemplateRef = "masterSqlSessionTemplate")
-public class MasterDataSourceConfig {
-    protected static final String BASE_PACKAGES = "com.tiandd.springcloud01.dao.master";
-    private static final String LOCATION_PATTERN = "classpath*:mapping/master/*.xml";
-    @Bean(name = "masterDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.master")
-    @Primary
+@MapperScan(basePackages = SlaveDataSourceConfig.BASE_PACKAGES, sqlSessionTemplateRef = "slaveSqlSessionTemplate")
+public class SlaveDataSourceConfig {
+    protected static final String BASE_PACKAGES = "com.tiandd.springcloud01.dao.slave";
+    private static final String LOCATION_PATTERN = "classpath*:mapping/slave/*.xml";
+    @Bean(name = "slaveDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.slave")
     public DataSource setDataSource() {
 
         return DataSourceBuilder.create().build();
     }
     //配置事务
-    @Bean(name = "masterTransactionManager")
-    @Primary
-    public DataSourceTransactionManager setTransactionManager(@Qualifier("masterDataSource") DataSource dataSource) {
+    @Bean(name = "slaveTransactionManager")
+    public DataSourceTransactionManager setTransactionManager(@Qualifier("slaveDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(name = "masterSqlSessionFactory")
-    @Primary
-    public SqlSessionFactory setSqlSessionFactory(@Qualifier("masterDataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "slaveSqlSessionFactory")
+    public SqlSessionFactory setSqlSessionFactory(@Qualifier("slaveDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(LOCATION_PATTERN));
         return bean.getObject();
     }
 
-    @Bean(name = "masterSqlSessionTemplate")
-    @Primary
-    public SqlSessionTemplate setSqlSessionTemplate(@Qualifier("masterSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean(name = "slaveSqlSessionTemplate")
+    public SqlSessionTemplate setSqlSessionTemplate(@Qualifier("slaveSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

@@ -1,4 +1,4 @@
-package com.tiandd.springcloud01.pojo;
+package com.tiandd.springcloud01.pojo.master;
 
 public class User {
     private Integer id;
@@ -38,4 +38,12 @@ public class User {
     public User() {
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

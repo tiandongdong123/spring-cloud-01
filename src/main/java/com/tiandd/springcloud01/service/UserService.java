@@ -1,6 +1,6 @@
 package com.tiandd.springcloud01.service;
 
-import com.tiandd.springcloud01.pojo.User;
+import com.tiandd.springcloud01.pojo.master.User;
 
 import java.util.List;
 

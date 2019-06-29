@@ -1,6 +1,6 @@
 package com.tiandd.springcloud01.dao.master;
 
-import com.tiandd.springcloud01.pojo.User;
+import com.tiandd.springcloud01.pojo.master.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

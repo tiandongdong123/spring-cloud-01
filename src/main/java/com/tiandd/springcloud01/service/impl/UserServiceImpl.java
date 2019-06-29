@@ -1,7 +1,7 @@
 package com.tiandd.springcloud01.service.impl;
 
 import com.tiandd.springcloud01.dao.master.UserDao;
-import com.tiandd.springcloud01.pojo.User;
+import com.tiandd.springcloud01.pojo.master.User;
 import com.tiandd.springcloud01.service.UserService;
 import org.springframework.stereotype.Service;
 
