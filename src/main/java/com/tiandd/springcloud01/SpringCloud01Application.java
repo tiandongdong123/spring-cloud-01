@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringCloud01Application {
 
     public static void main(String[] args) {
+
         SpringApplication.run(SpringCloud01Application.class, args);
     }
 
